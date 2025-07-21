@@ -1,4 +1,5 @@
 import {Router} from 'express'
+import { createAccount } from './handlers';
 
 const router = Router ()
 
@@ -8,11 +9,6 @@ router.get("/" , (req, res) => {
 });
 
 /* Autenticacion y registro */
-router.post('/auth/register', (req, res) =>
-{
-    console.log("Desde register")
-    console.log(req.body)
-})
-
+router.post('/auth/register',createAccount)
 
 export default router
