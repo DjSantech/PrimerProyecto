@@ -1,17 +1,13 @@
 import type {Request,Response} from 'express' 
 import User from "../models/user" 
 import {validationResult} from 'express-validator'
-import { hashPassword } from '../utils/auth'
+import { checkPassword, hashPassword } from '../utils/auth'
 import slug from 'slug'
 
 
 export const createAccount = async (req : Request, res: Response) =>
 {   
-    //manejo de errores
-    let errors = validationResult(req)
-    if (!errors.isEmpty()){
-        return res.status(400).json({errors: errors.array()})
-    }
+    
 
 
     const {email,password} = req.body
@@ -42,4 +38,30 @@ export const createAccount = async (req : Request, res: Response) =>
     await user.save()
     
     res.status(201).send('Registo creado correctamente')
+}
+
+
+export const login = async (req: Request, res: Response ) => {
+    
+  
+   
+    const {email,password} = req.body
+    const user = await User.findOne({email})
+
+    //Recibar si el usuario existe
+    if(!user){
+        const error = new Error("Este usuario no existe222")
+        return res.status(404).json({error: error.message})
+    } 
+    //verificacion de password
+    // const contraseña = user.password
+    const isPasswordCorrect = await checkPassword(password,user.password)
+    
+    if (!isPasswordCorrect) {
+        const error = new Error("La contraseña ingresada es incorrecta")
+        return res.status(401).json({error:error.message})
+    }
+
+    res.send("Autenticado...")
+
 }
