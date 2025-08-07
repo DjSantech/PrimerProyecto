@@ -17,7 +17,7 @@ export const createAccount = async (req : Request, res: Response) =>
         const error = new Error("Un usuario ya esta registrado con ese gmail")
         return res.status(409).json({error: error.message})
     } else {
-        console.log('Nuevo usuario')
+
     }
     
     const handle = slug(req.body.handle, '')
