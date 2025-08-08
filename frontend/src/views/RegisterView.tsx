@@ -16,7 +16,7 @@ export default function RegisterView() {
   }
   
   
-  const { register, watch, handleSubmit, formState: {errors}} = useForm ({defaultValues:initialValues})
+  const { register, watch, handleSubmit,reset, formState: {errors}} = useForm ({defaultValues:initialValues})
   
   const password = watch('password')
 
@@ -27,6 +27,7 @@ export default function RegisterView() {
     try {
       const {data } = await axios.post(` ${import.meta.env.VITE_API_URL}` , formData)
       console.log(data)
+      reset()
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         console.log(error.response?.data.error)
