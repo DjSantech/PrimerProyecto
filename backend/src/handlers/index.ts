@@ -50,7 +50,7 @@ export const login = async (req: Request, res: Response ) => {
 
     //Recibar si el usuario existe
     if(!user){
-        const error = new Error("Este usuario no existe222")
+        const error = new Error("Este usuario no existe")
         return res.status(404).json({error: error.message})
     } 
     //verificacion de password
