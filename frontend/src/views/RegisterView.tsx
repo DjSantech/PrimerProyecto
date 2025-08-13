@@ -6,6 +6,7 @@ import type { RegisterForm } from "../types"
 import { toast } from 'sonner'
 import api from "../config/axios"
 
+
 export default function RegisterView() {
   
   const initialValues : RegisterForm   = {
@@ -25,7 +26,7 @@ export default function RegisterView() {
   
   const handleRegister = async (formData:RegisterForm) => {
     try {
-      const {data } = await api.post(`/auth/register ` , formData)
+      const {data } = await api.post(`/auth/register` , formData)
       toast.success(data)
       reset()
     } catch (error) {
