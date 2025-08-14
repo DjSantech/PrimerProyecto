@@ -3,6 +3,7 @@ import User from "../models/user"
 import {validationResult} from 'express-validator'
 import { checkPassword, hashPassword } from '../utils/auth'
 import slug from 'slug'
+import { generateJWT } from '../utils/jwt'
 
 
 export const createAccount = async (req : Request, res: Response) =>
@@ -61,6 +62,8 @@ export const login = async (req: Request, res: Response ) => {
         const error = new Error("La contraseña ingresada es incorrecta")
         return res.status(401).json({error:error.message})
     }
+
+    generateJWT(user)
 
     res.send("Autenticado...")
 
