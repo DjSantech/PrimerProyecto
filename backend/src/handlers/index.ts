@@ -8,6 +8,7 @@ import { generateJWT } from '../utils/jwt'
 
 export const createAccount = async (req : Request, res: Response) =>
 {   
+    console.log('🧪 body en router:', req.body)
     
 
 

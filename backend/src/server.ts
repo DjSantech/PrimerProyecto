@@ -9,12 +9,13 @@ connectDB()
 
 const app = express ();
 
+
 //CORS
 app.use (cors(corsConfig))
 
-
 //Leer datos de formulario
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.use('/', router) 
 

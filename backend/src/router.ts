@@ -12,6 +12,10 @@ router.get("/" , (req, res) => {
 
 /* Autenticacion y registro */
 router.post('/auth/register',
+    (req, _res, next) => {
+    console.log('🧪 body en router:', req.body)
+    next()
+  },
     body ('handle')
         .notEmpty()
         .withMessage("El handle no puede ir vacio."),
