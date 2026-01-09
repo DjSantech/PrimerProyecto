@@ -1,7 +1,7 @@
 import mongoose, {Schema} from "mongoose";
 import slug from 'slug'
 
-interface User {
+export interface IUser {
     handle: string
     name: string
     email: string
@@ -38,6 +38,6 @@ const userSchema = new Schema ({
 
 })
 
-const User = mongoose.model<User>('user', userSchema)
+const User = mongoose.model<IUser>('user', userSchema)
 
 export default User
